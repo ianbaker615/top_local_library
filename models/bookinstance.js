@@ -15,9 +15,14 @@ var BookInstanceSchema = new Schema({
   due_back: { type: Date, default: Date.now },
 });
 
-// Virtual for bookinstance's URL
+// Virtual for bookinstance's due date
 BookInstanceSchema.virtual("due_back_formatted").get(function () {
   return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
+});
+
+// Virtual for bookinstances's URL
+BookInstanceSchema.virtual("url").get(function () {
+  return "/catalog/bookinstance/" + this._id;
 });
 
 //Export model
